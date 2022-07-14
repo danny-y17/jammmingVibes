@@ -1,0 +1,12 @@
+.Preloader {
+    display: "flex";
+    background: #010c3f;
+    background-size: cover;
+    background-position: center;
+    background-color: #010c3f;
+    background-repeat: no-repeat;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    color: #010c3f;
+    
+  }

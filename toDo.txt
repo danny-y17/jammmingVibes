@@ -1,0 +1,9 @@
+* Ensure playlist information doesn't get claered if a user has to refresh their access token=
+- when playListTracks is not empty, locally store the data. Pass it to tracklist to update playListTracks with the locally stored data.
+
+steps:
+1. 
+2.
+3.
+4.
+5.
