@@ -1,7 +1,7 @@
 let accessToken;
 let expirationTime;
 let clientId = process.env.REACT_APP_CLIENT_ID;
-let redirectUri =  "http://localhost:3000/";
+let redirectUri =  "https://creative-pithivier-4d9d40.netlify.app";
 const EXPIRES_ = "expires_";
 
 const Spotify = {
@@ -11,7 +11,7 @@ const Spotify = {
         // null if no match
         expirationTime = expiresInMatch ? expiresInMatch[1] : null;
         // default expiry time if no match
-        expirationTime = expirationTime !== null ? parseInt(expirationTime) : 3600;
+        expirationTime = expirationTime !== null ? expirationTime : 3600;
         // get saved data
         let expires = sessionStorage.getItem(EXPIRES_);
     
@@ -42,6 +42,7 @@ const Spotify = {
 
     async search(term) {    
         accessToken = this.getAcessToken();
+        term = term.replace(' ', '%20');
         return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
             headers: {Authorization: `Bearer ${accessToken}`}
         }).then(response => {
