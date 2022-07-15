@@ -17,11 +17,12 @@ class TrackList extends React.Component {
     render() {
         return (
             <div className="TrackList">
-                {
+                {   
+                    
                     this.props.track.map(tracks => {
-                        if (!this.inPlaylist(tracks)) {
+                        if (!this.inPlaylist(tracks) && (this.props.track)) {
                         return <Track track={tracks} key={tracks.id}
-                            playlistTracks = {this.props.playlistTracks}
+                            tracks = {this.props.playlistTracks}
                             onAdd = {this.props.onAdd} 
                             onRemove = {this.props.onRemove}
                             isRemoval = {this.props.isRemoval}

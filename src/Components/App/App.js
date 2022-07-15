@@ -6,6 +6,7 @@ import Playlist from '../Playlist/Playlist'
 import Spotify from '../../util/Spotify'
 import Preloader from '../loader/loader.tsx'
 
+
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -22,6 +23,7 @@ class App extends React.Component {
     this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
     this.updateTerm = this.updateTerm.bind(this);
+
   }
 
 
@@ -33,13 +35,26 @@ class App extends React.Component {
       })
     } 
 
-    const playlistTrack = JSON.parse(localStorage.getItem('saveTracks'));
-    if (playlistTrack) {
-      this.setState({
-        playListTrack: playlistTrack,
-      })
+    const list = localStorage.getItem('list');
+    let t = []
+    if (JSON.parse(list)) {
+    console.log(JSON.parse(list))
+    console.log(JSON.parse(list).length)
+    for(let i=0; i<JSON.parse(list).length; i++) {
+      let w = localStorage.getItem(JSON.parse(list)[i].id)
+      if (w) {
+        t.push(JSON.parse(w))
+      }
     }
+      if (t) {
+        console.log(t)
+      this.setState({
+        playListTrack: t
+      })
+    }   
   }
+
+}
 
 
   addTrack(track) {
@@ -127,11 +142,14 @@ class App extends React.Component {
           <div className="App-playlist">
             <SearchResults searchResults={this.state.searchResults} 
               onAdd = {this.addTrack}
-              playlistTracks = {this.state.playListTrack} />
+              playlistTracks = {this.state.playListTrack} 
+              />
+              
             <Playlist name={this.state.playlistName} track={this.state.playListTrack}
               onRemove = {this.removeTrack} 
               onNameChange = {this.updatePlaylistName} 
               onSave = {this.savePlaylist}
+  
               />
           </div>
         </div>

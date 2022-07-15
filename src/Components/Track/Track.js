@@ -21,21 +21,36 @@ class Track extends React.Component {
     // remove track from playlist
     removetrack() {
         this.props.onRemove(this.props.track);
+        if(localStorage.removeItem(this.props.track.id) !== null) {
+            localStorage.removeItem(this.props.track.id)
+        }
     }
     // adds track to playlist
     addTrack() {
         this.props.onAdd(this.props.track);
+        //this.saveTracklist();
     }
     
+    
     saveTracklist() {
-        if (this.props.playlistTracks && this.props.playlistTracks.length > 0) {
-            localStorage.setItem('saveTracks', JSON.stringify(this.props.playlistTracks))
+
+        if (this.props.tracks) {
+            if(localStorage.getItem('list') !== null) {
+                localStorage.removeItem('list');
+            }
+            this.props.tracks.map(track => {
+                if (localStorage.getItem(track.id) === null) {
+                localStorage.setItem(track.id, JSON.stringify(track))
+                }
+                return null;
+            })
+            localStorage.setItem('list', JSON.stringify(this.props.tracks))
         }
     }
+    
 
 
-
-    render() {;
+    render() {
         return(
             <div className="Track">
                 <div className="Track-information">
