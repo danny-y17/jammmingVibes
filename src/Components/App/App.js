@@ -67,29 +67,34 @@ class App extends React.Component {
   }
   
   savePlaylist() {
-    this.setState({
-      isLoading: true
-    });
     const trackUris = this.state.playListTrack.map(track => track.uri)
-    console.log(this.state.isLoading)
-    Spotify.savePlaylist(this.state.playlistName, trackUris).then(() => {
-        this.setState({
-          playlistName: 'New Playlist',
-          playListTrack: [],
-          searchResults: [],
-          term: ''
-        })
-    }).then(() => {
-      localStorage.clear()
-    }).then(() => {
-      setTimeout(() => {
-        console.log('loading: false')
-        this.setState({
-          isLoading: false,
-        })
-      },1000)
-    })
-}
+    if (trackUris.length > 0) {
+      this.setState({
+        isLoading: true
+      });
+      console.log(this.state.isLoading)
+      Spotify.savePlaylist(this.state.playlistName, trackUris).then(() => {
+          this.setState({
+            playlistName: 'New Playlist',
+            playListTrack: [],
+            searchResults: [],
+            term: ''
+          })
+      }).then(() => {
+        localStorage.clear()
+      }).then(() => {
+        setTimeout(() => {
+          console.log('loading: false')
+          this.setState({
+            isLoading: false,
+          })
+        },1000)
+      })
+    }
+    else {
+      alert('No tracks to save. Please add tracks to your playlist.')
+    }
+  }
 
   search(term) {
     Spotify.search(term).then(searchResults => {
