@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import "./Playlist.css"
 import Tracklist from "../Tracklist/Tracklist";
 class Playlist extends React.Component {

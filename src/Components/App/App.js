@@ -67,7 +67,9 @@ class App extends React.Component {
   }
   
   savePlaylist() {
-    this.state.isLoading = true;
+    this.setState({
+      isLoading: true
+    });
     const trackUris = this.state.playListTrack.map(track => track.uri)
     console.log(this.state.isLoading)
     Spotify.savePlaylist(this.state.playlistName, trackUris).then(() => {

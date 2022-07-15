@@ -27,6 +27,7 @@ class TrackList extends React.Component {
                             isRemoval = {this.props.isRemoval}
                             />
                         }
+                        return
                     })
                 }
             </div>
