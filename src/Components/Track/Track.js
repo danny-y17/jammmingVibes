@@ -21,7 +21,6 @@ class Track extends React.Component {
     // remove track from playlist
     removetrack() {
         this.props.onRemove(this.props.track);
-        localStorage.removeItem('saveTracks', this.props.track)
     }
     // adds track to playlist
     addTrack() {
@@ -30,7 +29,7 @@ class Track extends React.Component {
     
     saveTracklist() {
         if (this.props.playlistTracks && this.props.playlistTracks.length > 0) {
-            localStorage.setItem('saveTracks',JSON.stringify(this.props.playlistTracks))
+            localStorage.setItem('saveTracks', JSON.stringify(this.props.playlistTracks))
         }
     }
 

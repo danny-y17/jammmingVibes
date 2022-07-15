@@ -55,6 +55,7 @@ class App extends React.Component {
 
   removeTrack(track) {
     let tracks = this.state.playListTrack.filter(savedtrack => savedtrack.id !== track.id)
+    localStorage.removeItem('saveTracks', JSON.stringify(tracks))
     this.setState({
       playListTrack: tracks
     })
