@@ -6,6 +6,7 @@ class Track extends React.Component {
         super(props);
         this.addTrack = this.addTrack.bind(this);
         this.removetrack = this.removetrack.bind(this);
+        this.saveTracklist = this.saveTracklist.bind(this);
     }
 
     renderAction() {
@@ -26,6 +27,13 @@ class Track extends React.Component {
         this.props.onAdd(this.props.track);
     }
     
+    saveTracklist() {
+        if (this.props.playlistTracks && this.props.playlistTracks.length > 0) {
+            localStorage.setItem('saveTracks',JSON.stringify(this.props.playlistTracks))
+        }
+    }
+
+
 
     render() {;
         return(
@@ -36,6 +44,7 @@ class Track extends React.Component {
                     <audio controls src={this.props.track.preview}></audio>
                 </div>
                 {this.renderAction()}
+                {this.saveTracklist()}
             </div>
         )
     }

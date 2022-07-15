@@ -3,8 +3,6 @@ let expirationTime;
 let clientId = process.env.REACT_APP_CLIENT_ID;
 let redirectUri =  "http://localhost:3000/";
 const EXPIRES_ = "expires_";
-const EXPIRES_AT = 'expires_at';
-const DEFAULT_EXP = 3600;
 
 const Spotify = {
     getAcessToken() {
@@ -13,19 +11,18 @@ const Spotify = {
         // null if no match
         expirationTime = expiresInMatch ? expiresInMatch[1] : null;
         // default expiry time if no match
-        expirationTime = expirationTime ? parseInt(expirationTime) : DEFAULT_EXP;
-
+        expirationTime = expirationTime !== null ? parseInt(expirationTime) : 3600;
         // get saved data
         let expires = sessionStorage.getItem(EXPIRES_);
     
         // no saved data
         if (!expires) {
             expires = Date.now() + Number(expirationTime) * 1000;
-            sessionStorage.setItem(EXPIRES_AT, expires);
+            sessionStorage.setItem(EXPIRES_, expires);
         }
 
         if (Date.now() > expires) {
-            sessionStorage.removeItem(EXPIRES_AT);
+            sessionStorage.removeItem(EXPIRES_);
         }
       
         if (accessToken && (Date.now() < expires)) {

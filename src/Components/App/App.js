@@ -31,8 +31,14 @@ class App extends React.Component {
       this.setState({
         term: term,
       })
+    } 
+
+    const playlistTrack = JSON.parse(localStorage.getItem('saveTracks'));
+    if (playlistTrack) {
+      this.setState({
+        playListTrack: playlistTrack,
+      })
     }
- 
   }
 
 
@@ -67,8 +73,12 @@ class App extends React.Component {
     Spotify.savePlaylist(this.state.playlistName, trackUris).then(() => {
         this.setState({
           playlistName: 'New Playlist',
-          playlistTrack: [],
+          playListTrack: [],
+          searchResults: [],
+          term: ''
         })
+    }).then(() => {
+      localStorage.clear()
     }).then(() => {
       setTimeout(() => {
         console.log('loading: false')

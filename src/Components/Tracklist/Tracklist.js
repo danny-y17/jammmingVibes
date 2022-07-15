@@ -11,11 +11,9 @@ class TrackList extends React.Component {
             return (inPlaylist.find(savedTracks => savedTracks.id === track.id))
         }
     }
-
-    handleSave(track) {
-        this.props.savedTracks(track)
-    }
     
+
+
     render() {
         return (
             <div className="TrackList">
@@ -23,6 +21,7 @@ class TrackList extends React.Component {
                     this.props.track.map(tracks => {
                         if (!this.inPlaylist(tracks)) {
                         return <Track track={tracks} key={tracks.id}
+                            playlistTracks = {this.props.playlistTracks}
                             onAdd = {this.props.onAdd} 
                             onRemove = {this.props.onRemove}
                             isRemoval = {this.props.isRemoval}
